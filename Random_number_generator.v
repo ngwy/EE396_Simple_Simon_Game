@@ -33,7 +33,7 @@ always @(posedge clock)
     begin
     if(ran_bits == 8'hff) ran_bits <= 0;
     else ran_bits <= ran_bits + 1;
-    if((start == 1) && (enable == 1)) bit_gen_reg <= ran_bits;
+    if((start == 0) && (enable == 1)) bit_gen_reg <= ran_bits;  // 0 if start is pressed
     end
     
 assign bit_gen_sequence = bit_gen_reg;
