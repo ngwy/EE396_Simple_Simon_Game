@@ -20,20 +20,22 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Random_number_generator(
-    output [7:0] bit_gen_sequence,
-    input clock,
-    input enable,   // Enable number output
-    input start     // Start the game by generating random 8-bit sequence
+    output [7:0]    bit_gen_sequence,
+    input           clock,
+    input           enable,   // Enable number output
+    input           start     // Start the game by generating random 8-bit sequence
     );
     
 reg [7:0] ran_bits;
 reg [7:0] bit_gen_reg;
     
-always @(posedge clock)
-    begin
-    if(ran_bits == 8'hff) ran_bits <= 0;
-    else ran_bits <= ran_bits + 1;
-    if((start == 0) && (enable == 1)) bit_gen_reg <= ran_bits;  // 0 if start is pressed
+always @(posedge clock) begin
+    if(ran_bits == 8'hff) 
+        ran_bits    <= 0;
+    else 
+        ran_bits    <= ran_bits + 1;
+    if((start == 0) && (enable == 1)) 
+        bit_gen_reg <= ran_bits;  // 0 if start is pressed
     end
     
 assign bit_gen_sequence = bit_gen_reg;
